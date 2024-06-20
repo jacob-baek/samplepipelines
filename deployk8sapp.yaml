@@ -64,13 +64,12 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: Kubernetes@1
+          - task: KubernetesManifest@1
             inputs:
-              namespace: 'default'
-              command: 'get'
-              arguments: 'pod'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
+              action: 'deploy'
+              azureResourceGroup: 'akscni-rg'
+              kubernetesCluster: 'akscni-cluster'
+              manifests: 'yamls/deploy-nginx.yaml'
           - task: Kubernetes@1
             inputs:
               connectionType: 'Azure Resource Manager'
