@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- main
 
 # resources:
 #   repositories:
@@ -14,11 +14,10 @@ trigger:
 #     name: JacobBaekHome/sampleapp
 
 jobs:
-- deployment: deploy
+- deployment: deploy-app
   # condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
-  displayName: deploy to production
-  pool: "testvmss"
-  environment: testvmss
+  displayName: deploy application to production
+  environment: akscni-cluster-env
   strategy:
     runOnce:
       deploy:
@@ -30,8 +29,8 @@ jobs:
             action: 'deploy'
             namespace: 'default'
             #strategy: 'canary'
-            percentage: '50'
+            #percentage: '50'
             manifests: 'yamls/deploy-nginx.yaml'
-            secretType: 'dockerRegistry'
-            kubernetesServiceConnection: 'akscni-cluster-sc'
+            #secretType: 'dockerRegistry'
+            #kubernetesServiceConnection: 'akscni-cluster-sc'
             #containerRegistryType: 'Azure Container Registry'
