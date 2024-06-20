@@ -12,6 +12,8 @@ trigger:
 #     type: git
 #     endpoint: JacobBaekHome
 #     name: JacobBaekHome/sampleapp
+variables:
+  system.debug: 'true'
 
 stages:
 - stage: using_kubectl
