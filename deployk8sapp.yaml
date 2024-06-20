@@ -66,8 +66,6 @@ stages:
           steps:
           - task: Kubernetes@1
             inputs:
-              connectionType: 'Kubernetes Service Connection'
-              kubernetesServiceEndpoint: 'jenkins-user'
               namespace: 'default'
               command: 'get'
               arguments: 'pod'
