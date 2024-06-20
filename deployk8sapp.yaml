@@ -14,7 +14,7 @@ trigger:
 #     name: JacobBaekHome/sampleapp
 
 jobs:
-- deployment: deploy-app
+- deployment: deploy_app
   # condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
   displayName: deploy application to production
   environment: akscni-cluster-env
