@@ -29,3 +29,15 @@ stages:
         arguments: 'pod'
         secretType: 'dockerRegistry'
         containerRegistryType: 'Azure Container Registry'
+- stage: using_deploy_to_kubernetes
+  jobs:
+  - job: 
+    steps:
+    - task: KubernetesManifest@1
+      inputs:
+        action: 'deploy'
+        connectionType: 'azureResourceManager'
+        azureSubscriptionConnection: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
+        azureResourceGroup: 'akscni-rg'
+        kubernetesCluster: 'akscni-cluster'
+        manifests: 'https://raw.githubusercontent.com/jacobbaek/k8sYamls/main/sampleNginx/xff.yaml'
