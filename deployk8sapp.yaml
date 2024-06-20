@@ -18,7 +18,8 @@ variables:
 stages:
 - stage: using_kubectl
   jobs:
-  - job: kubectl_command
+  - job: job1
+    displayName: deploy application to production
     steps:
     - task: Kubernetes@1
       inputs:
@@ -29,15 +30,35 @@ stages:
         arguments: 'pod'
         secretType: 'dockerRegistry'
         containerRegistryType: 'Azure Container Registry'
-- stage: using_deploy_to_kubernetes
+# - stage: using_deploy_to_kubernetes
+#   jobs:
+#   - job: job1
+#     environment:
+#       name: 'akscni-cluster-env'
+#     steps:
+#     - task: KubernetesManifest@1
+#       inputs:
+#         action: 'deploy'
+#         connectionType: 'azureResourceManager'
+#         azureSubscriptionConnection: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
+#         azureResourceGroup: 'akscni-rg'
+#         kubernetesCluster: 'akscni-cluster'
+#         manifests: 'yamls/deploy-nginx.yaml'
+- stage: check_env
   jobs:
-  - job: 
-    steps:
-    - task: KubernetesManifest@1
-      inputs:
-        action: 'deploy'
-        connectionType: 'azureResourceManager'
-        azureSubscriptionConnection: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
-        azureResourceGroup: 'akscni-rg'
-        kubernetesCluster: 'akscni-cluster'
-        manifests: 'yamls/deploy-nginx.yaml'
+  - deployment: check_environment
+    displayName: check_environment
+    environment: 
+      name: 'akscni-cluster-env'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: KubernetesManifest@1
+            inputs:
+              action: 'deploy'
+              connectionType: 'azureResourceManager'
+              azureSubscriptionConnection: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
+              azureResourceGroup: 'akscni-rg'
+              kubernetesCluster: 'akscni-cluster'
+              manifests: 'yamls/deploy-nginx.yaml'
