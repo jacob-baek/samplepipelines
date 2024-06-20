@@ -13,24 +13,17 @@ trigger:
 #     endpoint: JacobBaekHome
 #     name: JacobBaekHome/sampleapp
 
-jobs:
-- deployment: deploy_app
-  # condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
-  displayName: deploy application to production
-  environment: akscni-cluster-env
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-        - checkout : self
-        - task: KubernetesManifest@0
-          displayName: deploy sampleapp
-          inputs:
-            action: 'deploy'
-            namespace: 'default'
-            #strategy: 'canary'
-            #percentage: '50'
-            manifests: 'yamls/deploy-nginx.yaml'
-            #secretType: 'dockerRegistry'
-            #kubernetesServiceConnection: 'akscni-cluster-sc'
-            #containerRegistryType: 'Azure Container Registry'
+stages:
+- stage: using_kubectl
+  jobs:
+  - job: kubectl_command
+    steps:
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'jenkins-user'
+        namespace: 'default'
+        command: 'get'
+        arguments: 'pod'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
