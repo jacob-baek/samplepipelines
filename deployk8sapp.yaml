@@ -23,11 +23,12 @@ stages:
     steps:
     - task: Kubernetes@1
       inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceEndpoint: 'jenkins-user'
-        namespace: 'default'
+        connectionType: 'Azure Resource Manager'
+        azureSubscriptionEndpoint: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
+        azureResourceGroup: 'akscni-rg'
+        kubernetesCluster: 'akscni-cluster'
         command: 'get'
-        arguments: 'pod'
+        arguments: 'nodde'
         secretType: 'dockerRegistry'
         containerRegistryType: 'Azure Container Registry'
     # - task: KubernetesManifest@1
