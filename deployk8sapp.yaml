@@ -16,20 +16,20 @@ variables:
   system.debug: 'true'
 
 stages:
-# - stage: using_kubectl
-#   jobs:
-#   - job: job1
-#     displayName: deploy application to production
-#     steps:
-#     - task: Kubernetes@1
-#       inputs:
-#         connectionType: 'Kubernetes Service Connection'
-#         kubernetesServiceEndpoint: 'jenkins-user'
-#         namespace: 'default'
-#         command: 'get'
-#         arguments: 'pod'
-#         secretType: 'dockerRegistry'
-#         containerRegistryType: 'Azure Container Registry'
+- stage: using_kubectl
+  jobs:
+  - job: job1
+    displayName: deploy application to production
+    steps:
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'jenkins-user'
+        namespace: 'default'
+        command: 'get'
+        arguments: 'pod'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
     # - task: KubernetesManifest@1
     #   inputs:
     #     action: 'deploy'
@@ -71,14 +71,14 @@ stages:
               # kubernetesCluster: 'akscni-cluster'
               manifests: 'yamls/deploy-nginx.yaml'
               namespace: 'default'
-          - task: Kubernetes@1
-            inputs:
-              connectionType: 'Azure Resource Manager'
-              azureSubscriptionEndpoint: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
-              azureResourceGroup: 'akscni-rg'
-              kubernetesCluster: 'akscni-cluster'
-              namespace: 'default'
-              command: 'get'
-              arguments: 'pod'
-              secretType: 'dockerRegistry'
-              containerRegistryType: 'Azure Container Registry'
+          # - task: Kubernetes@1
+          #   inputs:
+          #     connectionType: 'Azure Resource Manager'
+          #     azureSubscriptionEndpoint: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
+          #     azureResourceGroup: 'akscni-rg'
+          #     kubernetesCluster: 'akscni-cluster'
+          #     namespace: 'default'
+          #     command: 'get'
+          #     arguments: 'pod'
+          #     secretType: 'dockerRegistry'
+          #     containerRegistryType: 'Azure Container Registry'
