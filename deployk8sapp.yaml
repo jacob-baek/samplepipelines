@@ -71,7 +71,7 @@ stages:
               action: 'deploy'
               # azureResourceGroup: 'akscni-rg'
               # kubernetesCluster: 'akscni-cluster'
-              kubernetesServiceConnection: 'default' # default resource in akscni-cluster-env
+              kubernetesServiceConnection: 'akscni-cluster-env-akscni-cluster-default-1719541246502' # default resource in akscni-cluster-env
               manifests: 'yamls/deploy-nginx.yaml'
               namespace: 'default'
           # - task: Kubernetes@1
