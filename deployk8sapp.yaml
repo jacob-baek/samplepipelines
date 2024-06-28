@@ -55,6 +55,7 @@ stages:
 #         kubernetesCluster: 'akscni-cluster'
 #         manifests: 'yamls/deploy-nginx.yaml'
 
+# 
 - stage: check_env
   jobs:
   - deployment: check_environment
@@ -70,6 +71,7 @@ stages:
               action: 'deploy'
               # azureResourceGroup: 'akscni-rg'
               # kubernetesCluster: 'akscni-cluster'
+              kubernetesServiceConnection: 'default' # default resource in akscni-cluster-env
               manifests: 'yamls/deploy-nginx.yaml'
               namespace: 'default'
           # - task: Kubernetes@1
