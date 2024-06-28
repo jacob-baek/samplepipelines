@@ -28,7 +28,7 @@ stages:
         azureResourceGroup: 'akscni-rg'
         kubernetesCluster: 'akscni-cluster'
         command: 'get'
-        arguments: 'nodde'
+        arguments: 'node'
         secretType: 'dockerRegistry'
         containerRegistryType: 'Azure Container Registry'
     # - task: KubernetesManifest@1
