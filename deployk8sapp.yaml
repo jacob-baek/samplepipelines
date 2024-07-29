@@ -56,24 +56,24 @@ stages:
 #         manifests: 'yamls/deploy-nginx.yaml'
 
 # 
-- stage: check_env
-  jobs:
-  - deployment: check_environment
-    displayName: check_environment
-    environment: 
-      name: 'akscni-cluster-env'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            inputs:
-              action: 'deploy'
-              # azureResourceGroup: 'akscni-rg'
-              # kubernetesCluster: 'akscni-cluster'
-              kubernetesServiceConnection: 'akscni-cluster-env-aksmonitor-cluster-default-1722231691092' # default resource in akscni-cluster-env
-              manifests: 'yamls/deploy-nginx.yaml'
-              namespace: 'default'
+# - stage: check_env
+#   jobs:
+#   - deployment: check_environment
+#     displayName: check_environment
+#     environment: 
+#       name: 'akscni-cluster-env'
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - task: KubernetesManifest@0
+#             inputs:
+#               action: 'deploy'
+#               # azureResourceGroup: 'akscni-rg'
+#               # kubernetesCluster: 'akscni-cluster'
+#               kubernetesServiceConnection: 'akscni-cluster-env-aksmonitor-cluster-default-1722231691092' # default resource in akscni-cluster-env
+#               manifests: 'yamls/deploy-nginx.yaml'
+#               namespace: 'default'
           # - task: Kubernetes@1
           #   inputs:
           #     connectionType: 'Azure Resource Manager'
