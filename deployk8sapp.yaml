@@ -24,7 +24,7 @@ stages:
     - task: Kubernetes@1
       inputs:
         connectionType: 'Azure Resource Manager'
-        azureSubscriptionEndpoint: 'jacobmssub(6fb4629e-0776-431c-b528-96a47c03d872)'
+        azureSubscriptionEndpoint: 'aksmonitor-cluster-sc'
         azureResourceGroup: 'aksmonitor-rg'
         kubernetesCluster: 'aksmonitor-cluster'
         command: 'get'
